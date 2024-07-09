@@ -12,6 +12,7 @@ import ExpenseTotal from './components/ExpenseTotal';
 import ExpenseList from './components/ExpenseList';
 import AllocationForm from './components/AllocationForm';
 import ExpenseItem from './components/ExpenseItem';
+import Currency from './components/Currency';
 //import Remaining from './components/Remaining';
 const App = () => {
     return (
@@ -19,18 +20,7 @@ const App = () => {
             <div className='container'>
                 <h1 className='mt-3'>Company's Budget Allocation</h1>
                     {
-                        <div className='form-row'>
-                            <div className='form-floating'>
-                                <select className="form-select" id="Currency">
-                                    <option value="£" name="Pound">£ Pound</option>
-                                    <option value="$" name="Dollar">$ Dollar</option>
-                                    <option value="€" name="Euro">€ Euro</option>
-                                    <option value="₹" name="Rupee">₹ Rupee</option>
-                                </select>
-                                <label for='Currency'>Currency </label>
-                            </div>
-                        </div>
-                    
+                        <Currency />                    
                     }
 
                     <div className='row mt-3'>
