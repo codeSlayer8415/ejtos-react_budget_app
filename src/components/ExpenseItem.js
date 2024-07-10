@@ -1,9 +1,11 @@
 import React, { useContext } from 'react';
 import { TiDelete } from 'react-icons/ti';
 import { AppContext } from '../context/AppContext';
+import { FcPlus } from "react-icons/fc";
+import '../App.css';
 
 const ExpenseItem = (props) => {
-    const { dispatch } = useContext(AppContext);
+    const { dispatch,currency } = useContext(AppContext);
 
     const handleDeleteExpense = () => {
         dispatch({
@@ -25,11 +27,39 @@ const ExpenseItem = (props) => {
 
     }
 
+    const decreaseAllocation = (props)=>{
+        let alloted_budget=props.cost;
+        if(alloted_budget-10<0)
+        {
+            alert(`It is not possible to reduce the funds for this item`);
+        }
+        else
+        {
+            const reduction={
+
+                name:props.name,
+                cost:10,
+            }
+            dispatch(
+                {
+                    type:'DECREASE_EXPENSE',
+                    payload:reduction,
+                }
+            );
+        }
+        
+    }
+
     return (
         <tr>
         <td>{props.name}</td>
-        <td>£{props.cost}</td>
-        <td><button onClick={event=> increaseAllocation(props.name)}>+</button></td>
+        <td>{currency}{props.cost}</td>
+        {/*<td><button className="buttons" onClick={event=> increaseAllocation(props.name)}>+</button></td>
+        <td><button className="buttons" onClick={event=> decreaseAllocation(props)}>-</button></td>*/}
+        {/*<td><FcPlus size='1.5em' onClick={event=> increaseAllocation(props.name)}/></td>
+        <td><FcPlus size='1.5em' onClick={event=> decreaseAllocation(props)}>-</FcPlus></td>*/}
+        <td><button className="button_green" onClick={event=> increaseAllocation(props.name)}>+</button></td>
+        <td><button className="button_red" onClick={event=> decreaseAllocation(props)}>-</button></td>
         <td><TiDelete size='1.5em' onClick={handleDeleteExpense}></TiDelete></td>
         </tr>
     );
